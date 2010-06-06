@@ -1,0 +1,62 @@
+# vim: ft=python expandtab
+#import tempfile
+#import re
+#import subprocess
+#import os
+
+from site_init import *
+Import('env')
+
+'''
+	-DDBUS_COMPILATION=1					\
+	-DDBUS_LOCALEDIR=\"$(prefix)/@DATADIRNAME@/locale\" 
+'''
+env_dbus_glib = env.Clone(PDB = 'libdbus-glib.pdb')
+env_dbus_glib.Append(CPPDEFINES = [('DBUS_COMPILATION', 1),
+                         ('DBUS_LOCALEDIR', r'\"' + env['PREFIX'].replace('\\', r'\\') + r'\\share\\locale\"')])
+env_dbus_glib.Append(CPPPATH=['#dbus'])
+
+
+DBUS_GLIB_INTERNALS = Split(" \
+	dbus-gtype-specialized.c	        \
+	dbus-gutils.c				\
+	dbus-gsignature.c			\
+	dbus-gvalue-utils.c")
+
+libdbus_glib_SOURCES = Split("\
+	dbus-glib.c				\
+	dbus-gmain.c				\
+	dbus-gmarshal.c				\
+	dbus-gobject.c				\
+	dbus-gproxy.c				\
+	dbus-gtest.c				\
+	dbus-gvalue.c				\
+	dbus-gthread.c") + DBUS_GLIB_INTERNALS
+
+libdbus_glib_HEADERS =  Split(" \
+	dbus-gtype-specialized.h	\
+	dbus-glib.h			\
+        dbus-glib-lowlevel.h		\
+        dbus-glib-error-enum.h")
+
+env_dbus_glib['EXPORT_REGEX'] = 'dbus_g.*'
+env_dbus_glib['DEF_BLACKLIST']=['dbus_g_pending_call_get_pending_call']
+env_dbus_glib.DefGeneratorByRegex('libdbus-glib.def', libdbus_glib_HEADERS)
+
+dll = env_dbus_glib.SharedLibrary(['libdbus-glib' + env_dbus_glib['LIB_SUFFIX'] + '.dll', 'dbus-glib.lib'], libdbus_glib_SOURCES + ['libdbus-glib.def'])
+env_dbus_glib.AddPostAction(dll, 'mt.exe -nologo -manifest ${TARGET}.manifest -outputresource:$TARGET;2')
+env_dbus_glib.Alias('install', env_dbus_glib.Install('$PREFIX/include/dbus-1.0/dbus', libdbus_glib_HEADERS))
+env_dbus_glib['DOT_IN_SUBS']['@HEADERS@'] = generate_file_element(libdbus_glib_HEADERS, r'include/dbus-1.0/dbus', env_dbus_glib)
+env_dbus_glib.Alias('install', env_dbus_glib.Install('$PREFIX/bin', 'libdbus-glib' + env_dbus_glib['LIB_SUFFIX'] + '.dll'))
+env_dbus_glib['DOT_IN_SUBS']['@DLLS@'] = generate_file_element('libdbus-glib' + env_dbus_glib['LIB_SUFFIX'] + '.dll', r'bin', env_dbus_glib)
+env_dbus_glib.Alias('install', env_dbus_glib.Install('$PREFIX/lib', 'dbus-glib.lib'))
+env_dbus_glib.Alias('install', env_dbus_glib.InstallAs('$PREFIX/lib/libdbus-glib.lib', 'dbus-glib.lib'))
+env_dbus_glib['DOT_IN_SUBS']['@LIBS@'] = generate_file_element(['libdbus-glib.lib', 'dbus-glib.lib'], r'lib', env_dbus_glib)
+if env_dbus_glib['DEBUG'] == 1:
+    env_dbus_glib.Alias('install', env_dbus_glib.Install('$PREFIX/pdb', 'libdbus-glib.pdb'))
+    env_dbus_glib['DOT_IN_SUBS']['@PDBS@'] = generate_file_element(env_dbus_glib['PDB'], r'pdb', env_dbus_glib)
+
+env_dbus_glib.DotIn('dbus-glibrun.wxs', 'dbus-glibrun.wxs.in')
+env_dbus_glib.DotIn('dbus-glibdev.wxs', 'dbus-glibdev.wxs.in')
+
+env_dbus_glib.Alias('install', env_dbus_glib.Install('$PREFIX/wxs', ['dbus-glibrun.wxs', 'dbus-glibdev.wxs']))

@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+   <Module Id='LibdbusglibRun' Language='1033' Version='@VERSION@'>
+      <Package Id='bf673697-4fc8-43a1-9a97-fb95637b9176' Description='Libdbus-glib runtime package'
+                Comments='This is a windows installer for libdbus-glib library runtime files'
+                Manufacturer='Gnome4Win' InstallerVersion='200' />
+ 
+      <Directory Id='TARGETDIR' Name='SourceDir'>
+		  <Directory Id='dlls' Name='bin'>
+			  <Component Id='dlls' Guid='3b1d0189-3992-44d5-ab68-863977157945'>
+				  @DLLS@
+			  </Component>
+		  </Directory>
+      </Directory>
+   </Module>
+</Wix>

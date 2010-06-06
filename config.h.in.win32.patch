@@ -1,0 +1,120 @@
+--- config.h.win32.in	Sat Jun  5 11:01:46 2010
++++ config.h.win32.in.new	Sat Jun  5 11:19:42 2010
+@@ -13,7 +13,7 @@
+ #undef DBUS_DISABLE_CHECKS
+ 
+ /* Support a verbose mode */
+-#undef DBUS_ENABLE_VERBOSE_MODE
++#define DBUS_ENABLE_VERBOSE_MODE 1
+ 
+ /* Defined if gcov is enabled to force a rebuild due to config.h changing */
+ #undef DBUS_GCOV_ENABLED
+@@ -28,7 +28,7 @@
+ #undef ENABLE_NLS
+ 
+ /* The name of the gettext domain */
+-#undef GETTEXT_PACKAGE
++#undef GETTEXT_PACKAGE "dbus-glib-1"
+ 
+ /* Disable GLib assertion macros */
+ #undef G_DISABLE_ASSERT
+@@ -40,7 +40,7 @@
+ #undef HAVE_ABSTRACT_SOCKETS
+ 
+ /* Define to 1 if you have the `bind_textdomain_codeset' function. */
+-#undef HAVE_BIND_TEXTDOMAIN_CODESET
++#define HAVE_BIND_TEXTDOMAIN_CODESET 1
+ 
+ /* Define to 1 if you have the `dcgettext' function. */
+ #undef HAVE_DCGETTEXT
+@@ -55,37 +55,37 @@
+ #undef HAVE_GETTEXT
+ 
+ /* Define to 1 if you have the <inttypes.h> header file. */
+-#undef HAVE_INTTYPES_H
++#define HAVE_INTTYPES_H 1
+ 
+ /* Define if your <locale.h> file defines LC_MESSAGES. */
+ #undef HAVE_LC_MESSAGES
+ 
+ /* Define to 1 if you have the <locale.h> header file. */
+-#undef HAVE_LOCALE_H
++#define HAVE_LOCALE_H 1
+ 
+ /* Define to 1 if you have the <memory.h> header file. */
+-#undef HAVE_MEMORY_H
++#define HAVE_MEMORY_H 1
+ 
+ /* Have socklen_t type */
+ #undef HAVE_SOCKLEN_T
+ 
+ /* Define to 1 if you have the <stdint.h> header file. */
+-#undef HAVE_STDINT_H
++#define HAVE_STDINT_H 1
+ 
+ /* Define to 1 if you have the <stdlib.h> header file. */
+-#undef HAVE_STDLIB_H
++#define HAVE_STDLIB_H 1
+ 
+ /* Define to 1 if you have the <strings.h> header file. */
+-#undef HAVE_STRINGS_H
++#define HAVE_STRINGS_H 1
+ 
+ /* Define to 1 if you have the <string.h> header file. */
+-#undef HAVE_STRING_H
++#define HAVE_STRING_H 1
+ 
+ /* Define to 1 if you have the <sys/stat.h> header file. */
+-#undef HAVE_SYS_STAT_H
++#define HAVE_SYS_STAT_H 1
+ 
+ /* Define to 1 if you have the <sys/types.h> header file. */
+-#undef HAVE_SYS_TYPES_H
++#define HAVE_SYS_TYPES_H 1
+ 
+ /* Define to 1 if you have the <unistd.h> header file. */
+ #undef HAVE_UNISTD_H
+@@ -95,28 +95,28 @@
+ #undef LT_OBJDIR
+ 
+ /* Name of package */
+-#undef PACKAGE
++#undef PACKAGE "dbus-glib"
+ 
+ /* Define to the address where bug reports for this package should be sent. */
+-#undef PACKAGE_BUGREPORT
++#undef PACKAGE_BUGREPORT "https://bugs.freedesktop.org/enter_bug.cgi?product=dbus"
+ 
+ /* Define to the full name of this package. */
+-#undef PACKAGE_NAME
++#undef PACKAGE_NAME "dbus-glib"
+ 
+ /* Define to the full name and version of this package. */
+-#undef PACKAGE_STRING
++#undef PACKAGE_STRING "dbus-glib @VERSION@"
+ 
+ /* Define to the one symbol short name of this package. */
+-#undef PACKAGE_TARNAME
++#undef PACKAGE_TARNAME "dbus-glib"
+ 
+ /* Define to the home page for this package. */
+-#undef PACKAGE_URL
++#undef PACKAGE_URL ""
+ 
+ /* Define to the version of this package. */
+-#undef PACKAGE_VERSION
++#undef PACKAGE_VERSION "@VERSION@"
+ 
+ /* Define to 1 if you have the ANSI C header files. */
+-#undef STDC_HEADERS
++#undef STDC_HEADERS 1
+ 
+ /* Full path to test file test/core/test-service-glib in builddir */
+ #undef TEST_CORE_SERVICE_BINARY
+@@ -143,4 +143,4 @@
+ #undef TEST_SLEEP_FOREVER_BINARY
+ 
+ /* Version number of package */
+-#undef VERSION
++#undef VERSION "@VERSION@"
++

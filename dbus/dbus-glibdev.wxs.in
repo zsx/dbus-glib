@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+   <Module Id='LibdbusglibDev' Language='1033' Version='@VERSION@'>
+      <Package Id='8afac56c-b655-4b54-9bf9-0ed90185ac2a' Description='Libdbus-glib devlopement package'
+                Comments='This is a windows installer for libdbus-glib library devlopment files'
+                Manufacturer='Gnome4Win' InstallerVersion='200' />
+ 
+      <Directory Id='TARGETDIR' Name='SourceDir'>
+		  <Directory Id='include' Name='include'>
+			  <Component Id='headers' Guid='84db83b0-ad45-4df4-8deb-0110d9608dee'>
+				  @HEADERS@
+			  </Component>
+		  </Directory>
+		  <Directory Id='lib' Name='lib'>
+			  <Component Id='libs' Guid='1a0cc679-a8cd-4fca-b1dd-2ad6f1ec1595'>
+				  @LIBS@
+			  </Component>
+			  <Directory Id='pkgconfig' Name='pkgconfig'>
+				  <Component Id='pcs' Guid='d3be3982-bdcd-4502-bf6c-58036decf972'>
+					  @PCS@
+				  </Component>
+			  </Directory>
+		  </Directory>
+		  <Directory Id='pdb' Name='pdb'>
+			  <Component Id='pdbs' Guid='539e37c2-b1be-4986-87e7-46c50c29616c'>
+				  @PDBS@
+			  </Component>
+		  </Directory>
+      </Directory>
+   </Module>
+</Wix>
