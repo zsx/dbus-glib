@@ -802,10 +802,10 @@ demarshal_strv (DBusGValueMarshalCtx    *context,
 
   while ((current_type = dbus_message_iter_get_arg_type (&subiter)) != DBUS_TYPE_INVALID)
     {
-      g_assert (current_type == DBUS_TYPE_STRING);
       const char *str;
       char *copy;
       
+      g_assert (current_type == DBUS_TYPE_STRING);
       dbus_message_iter_get_basic (&subiter, &str);
       copy = g_strdup (str);
       g_array_append_val (arr, copy);
